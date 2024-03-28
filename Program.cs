@@ -16,6 +16,7 @@ while (choice != "q")
 {
     Console.WriteLine("1) Add Movie");
     Console.WriteLine("2) Display All Movies");
+    Console.WriteLine("3) Find Movie");
     Console.WriteLine("q) Quit");
     choice = Console.ReadLine();
 
@@ -40,6 +41,29 @@ while (choice != "q")
             Console.WriteLine(m.Display());
         }
     }
+    else if (choice == "3")
+    {
+        Console.WriteLine("Enter movie title to search for");
+        string MovieTitle = Console.ReadLine().ToLower();
+
+        var foundMovies = movieFile.Movies.Where(m => m.title.ToLower().Contains(MovieTitle));
+
+        Console.WriteLine($"The movies that contain {MovieTitle} in the title are: \n");
+        foreach (Movie m in foundMovies)
+        {
+            Console.WriteLine(m.Display());
+        }
+
+        Console.WriteLine($"There are {foundMovies.Count()} movies found with {MovieTitle} in the title\n");
+    }
+    else if (choice == "q")
+    {
+        Console.WriteLine("Goodbye");
+    }
+    else
+    {
+        Console.WriteLine("Invalid choice");
+}
 }
 
 logger.Info("Program ended");
